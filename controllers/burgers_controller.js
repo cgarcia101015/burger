@@ -6,7 +6,7 @@ var burger = require("../models/burger.js");
 
 // Create all our routes and set up logic within those routes where required.
 router.get("/", function(req, res) {
-    cat.all(function(data) {
+    burger.all(function(data) {
       var hbsObject = {
         burgers: data
       };
@@ -15,21 +15,21 @@ router.get("/", function(req, res) {
     });
   });
 
-  router.post("/api/cats", function(req, res) {
-    cat.create(["name", "sleepy"], [req.body.name, req.body.sleepy], function(result) {
+  router.post("/api/burgers", function(req, res) {
+    cat.create(["burger_name", "devoured"], [req.body.burger_name, req.body.devoured], function(result) {
       // Send back the ID of the new quote
       res.json({ id: result.insertId });
     });
   });
   
-  router.put("/api/cats/:id", function(req, res) {
+  router.put("/api/burgers/:id", function(req, res) {
     var condition = "id = " + req.params.id;
   
     console.log("condition", condition);
   
-    cat.update(
+    burger.update(
       {
-        sleepy: req.body.sleepy
+        devoured: req.body.devoured
       },
       condition,
       function(result) {
